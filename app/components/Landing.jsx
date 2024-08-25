@@ -63,7 +63,7 @@ const Landing = () => {
   return (
     <>
       {/* Navbar Section */}
-      <div className="font-RedHat flex justify-between items-center p-6">
+      <div className="font-RedHat flex justify-between items-center overflow-x-hidden p-6">
         <div
           id="title"
           className="font-extrabold text-xl md:text-3xl text-green-500"
@@ -91,7 +91,7 @@ const Landing = () => {
             Github
           </div>
           <Link
-            href="/user/home"
+            href="/login"
             className="border-2 px-4 py-1 rounded-full transition-all hover:bg-green-500 active:scale-[0.8]"
           >
             Login
@@ -120,7 +120,7 @@ const Landing = () => {
             <div className="cursor-pointer">Teams</div>
             <div className="cursor-pointer">Github</div>
             <Link
-              href="/user/home"
+              href="/login"
               className="border-2 px-4 py-1 rounded-full transition-all hover:bg-green-500 active:scale-[0.8]"
             >
               Login
@@ -129,7 +129,7 @@ const Landing = () => {
         ) : (
           <div
             id="nav2"
-            className="w-1/2 space-x-2 transition-all absolute h-full top-0 -right-full z-20 p-11 space-y-6 items-center bg-black/20 backdrop-blur-lg md:space-x-4 flex flex-col font-semibold text-white"
+            className=" w-1/2 space-x-2 transition-all absolute h-full top-0 -right-full z-20 p-11 space-y-6 items-center bg-black/20 backdrop-blur-lg md:space-x-4 flex flex-col font-semibold text-white"
           >
             <div
               onClick={() => setMenu(false)}
@@ -157,7 +157,7 @@ const Landing = () => {
       <span className="h-24 w-24 md:h-48 md:w-48 rounded-full bg-blue-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10"></span>
 
       {/* Main Content Section */}
-      <div className="relative h-full w-full p-5 flex flex-col md:flex-row justify-center items-center backdrop-blur-3xl bg-black/30">
+      <div className="relative overflow-x-hidden  h-full w-full p-5 flex flex-col md:flex-row justify-center items-center backdrop-blur-3xl bg-black/30">
         <div
           id="text"
           className="w-full md:w-1/2 pb-10 font-RedHat font-extrabold text-3xl md:text-6xl z-10 text-green-500 space-x-2 md:space-x-4"

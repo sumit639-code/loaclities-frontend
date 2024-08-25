@@ -7,7 +7,7 @@ const notfound = () => {
   const text = "404";
   useGSAP(() => {
     var tl = gsap.timeline({
-      delay: 1.02,
+      delay: 0.02,
       repeat: -1,
       //   repeatDelay: 0.5,
     });
