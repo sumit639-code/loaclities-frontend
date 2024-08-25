@@ -1,8 +1,12 @@
+"use client"
 import { Category, Home, Logout, People, Search } from "@mui/icons-material";
 import Link from "next/link";
 import React from "react";
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    localStorage.setItem("refreshToken", "");
+  };
   return (
     <div className="font-RedHat font-semibold">
       {/* Desktop Sidebar */}
@@ -30,17 +34,17 @@ const Sidebar = () => {
             Search
           </Link>
           <Link
-            href="/profile"
+            href="/user/profile"
             className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
           >
             Profiles
           </Link>
-          <Link
-            href="/"
+          <button
+            onClick={handleLogout}
             className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
           >
             Logout
-          </Link>
+          </button>
         </nav>
       </div>
 

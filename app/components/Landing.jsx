@@ -75,19 +75,19 @@ const Landing = () => {
           className="hidden md:flex space-x-2 md:space-x-4 items-center font-semibold text-white transition-all"
         >
           <Link
-            href="/user/home"
+            href="/login"
             id="nav-inn"
-            className="cursor-pointer hover:scale-y-[1.1] p-2"
+            className="cursor-pointer hover:scale-[1.1] p-2"
           >
             Businesses
           </Link>
-          <div id="nav-inn" className="cursor-pointer hover:scale-y-[1.1] p-2">
+          <div id="nav-inn" className="cursor-pointer hover:scale-[1.1] p-2">
             About
           </div>
-          <div id="nav-inn" className="cursor-pointer hover:scale-y-[1.1] p-2">
+          <div id="nav-inn" className="cursor-pointer hover:scale-[1.1] p-2">
             Teams
           </div>
-          <div id="nav-inn" className="cursor-pointer hover:scale-y-[1.1] p-2">
+          <div id="nav-inn" className="cursor-pointer hover:scale-[1.1] p-2">
             Github
           </div>
           <Link

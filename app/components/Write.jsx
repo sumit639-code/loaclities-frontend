@@ -7,7 +7,6 @@ const Write = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
- 
   const projects = ["Project A", "Project B", "Project C"];
 
   const handleProjectSelect = (project) => {
@@ -23,20 +22,19 @@ const Write = () => {
 
   useEffect(() => {
     console.log(dropdownRef.current);
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   return (
-    <div className="max-w-lg w-full">
+    <div className="max-w-lg w-full space-y-3">
       <div className="flex w-full items-center justify-center space-x-5 font-RedHat font-semibold">
-        <div>
-          <Person className="border-2 p-1 text-4xl rounded-full" />
-        </div>
+        <button className="border-2 p-1 rounded-full  flex items-center" >
+          <Person />
+        </button>
         <textarea
           className="text-black p-2 rounded-xl outline-none border-2 cursor-text text-sm border-slate-500 w-full resize-none"
           placeholder="Write something"
@@ -44,10 +42,10 @@ const Write = () => {
           style={{ maxHeight: "200px" }}
         />
       </div>
-      <div className="flex items-center justify-between font-RedHat font-semibold text-sm space-y-4 relative">
-        <div>
+      <div className="flex items-center justify-between font-RedHat font-semibold text-sm relative">
+        <button className="p-1">
           <AttachFile />
-        </div>
+        </button>
         <div className="space-x-2 flex" ref={dropdownRef}>
           <button
             className="py-1 px-4 rounded-full border-2 flex items-center border-slate-700"
