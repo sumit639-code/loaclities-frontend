@@ -1,12 +1,35 @@
 "use client"
+import React, { useState } from "react";
 import { Category, Home, Logout, People, Search } from "@mui/icons-material";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import Modal from "./Modal";
+// Import the Modal component
+
+const logoutUrl = "http://localhost:8080/users/logout"; // Correct URL
 
 const Sidebar = () => {
-  const handleLogout = () => {
-    localStorage.setItem("refreshToken", "");
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(logoutUrl, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      localStorage.removeItem("refreshToken");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed", error);
+    } finally {
+      setShowModal(false);
+    }
   };
+
   return (
     <div className="font-RedHat font-semibold">
       {/* Desktop Sidebar */}
@@ -40,7 +63,7 @@ const Sidebar = () => {
             Profiles
           </Link>
           <button
-            onClick={handleLogout}
+            onClick={() => setShowModal(true)}
             className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
           >
             Logout
@@ -83,16 +106,23 @@ const Sidebar = () => {
               <People />
             </span>
           </Link>
-          <Link
-            href="/"
+          <button
+            onClick={() => setShowModal(true)}
             className="flex flex-col items-center justify-center py-2.5 px-4"
           >
-            <span>
-              <Logout />
-            </span>
-          </Link>
+            <Logout />
+          </button>
         </div>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleLogout}
+        title="Confirm Logout"
+        message="Are you sure you want to logout?"
+      />
     </div>
   );
 };

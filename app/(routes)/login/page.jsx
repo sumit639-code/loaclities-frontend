@@ -30,7 +30,9 @@ const Page = () => {
       const response = await fetch(url, {
         method: "POST",
         credentials: "include",
+        
         headers: {
+          
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userLogin),
@@ -42,13 +44,14 @@ const Page = () => {
         const errorMessage = errorData.message || "An unknown error occurred";
         throw new Error(errorMessage);
       }
-
+      console.log(response);
+      
       const data = await response.json();
       localStorage.setItem("refreshToken", data.data.refreshToken);
       router.push("/user/home");
     } catch (error) {
       setError(error.message); // Set the error message
-      console.log(error.message, "Error in response");
+      console.error(error, "Error in response");
     }
   };
 
@@ -102,6 +105,7 @@ const Page = () => {
               required
               autoComplete="current-password"
               placeholder="Password"
+              autoFocus
               onChange={handleInput}
               value={userLogin.password}
               className="px-3 py-2 rounded-sm outline-none text-black shadow-md transition-all shadow-green-500/40 w-full hover:scale-[0.99]"
