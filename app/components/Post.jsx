@@ -7,7 +7,7 @@ const Post = (props) => {
   console.log(props.images.length);
 
   return (
-    <div className="w-full max-w-lg mx-auto p-2 border-[1px] border-slate-800 mt-5 rounded-xl">
+    <div className="w-full max-w-lg mx-auto p-2 border-[1px] border-slate-800 mt-5 rounded-xl ">
       <div className="p-3 pb-1 flex items-center justify-between font-RedHat font-semibold">
         <div className="flex items-center space-x-3">
           <div className="border-2 rounded-full w-9 h-9 flex items-center justify-center cursor-pointer overflow-hidden">
@@ -21,7 +21,7 @@ const Post = (props) => {
           </div>
           <div className="text-[15px] sm:text-[16px]">
             <div>{props.username}</div>
-            <div className="text-[10px] font-Poppins opacity-65 text-green-100">
+            <div className="text-[10px] font-Poppins  text-green-100/70">
               {props.productname}
             </div>
           </div>
@@ -34,18 +34,19 @@ const Post = (props) => {
       </div>
 
       <div
-        className={`p-3 grid gap-4 grid-cols-${props.images.length}  justify-center`}
+        className={`p-3 grid gap-4 grid-rows-${props.images.length/2} grid-flow-col  justify-center`}
       >
         {props.images.length > 0 ? (
           props.images.map((image, index) => (
-            <div key={index} className="relative w-full h-60">
+            <div key={index} className=" w-full h-60 ">
               <Image
                 src={image}
-                layout="fill"
-                objectFit="cover"
+                width={500}
+                height={500}
+                
                 alt={`image ${index + 1}`}
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="rounded-lg"
+                
+                className="rounded-lg w-full h-full object-cover -z-0"
                 loading="lazy"
               />
             </div>

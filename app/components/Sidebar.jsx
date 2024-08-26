@@ -31,7 +31,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="font-RedHat font-semibold">
+    <div className="font-RedHat font-semibold z-10 ">
       {/* Desktop Sidebar */}
       <div className="hidden md:flex text-white items-center justify-center h-full font-RedHat">
         <div className="p-6">
@@ -51,7 +51,7 @@ const Sidebar = () => {
             Categories
           </Link>
           <Link
-            href="#"
+            href="/user/search"
             className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
           >
             Search
@@ -91,7 +91,7 @@ const Sidebar = () => {
             </span>
           </Link>
           <Link
-            href="#"
+            href="/user/search"
             className="flex flex-col items-center justify-center py-2.5 px-4"
           >
             <span>
