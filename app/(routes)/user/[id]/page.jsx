@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/components/loading";
 const url = "http://localhost:8080/users/userprofile";
+const url2 = "http://localhost:8080/users/follow";
+
 const ProfilePage = ({ params }) => {
   console.log(params);
 
@@ -11,7 +13,8 @@ const ProfilePage = ({ params }) => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
+    console.log(user);
+    
   useEffect(() => {
     const token = localStorage.getItem("refreshToken");
     if (!token || token === "") {
@@ -47,6 +50,27 @@ const ProfilePage = ({ params }) => {
     }
   }, [isAuthenticated]);
 
+  const followUser = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(url2, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      });
+      const data = await response.json();
+      console.log(data.data);
+       // Assuming your API response contains a list of products
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+    } finally {
+      
+    }
+  };
+
   if (loading) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -74,7 +98,7 @@ const ProfilePage = ({ params }) => {
           This is a short bio or tagline about the user.
         </p>
         <div className="flex space-x-4 mt-4">
-          <button className="px-4 py-2 rounded-full border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition">
+          <button onClick={followUser} className="px-4 py-2 rounded-full border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition">
             Follow
           </button>
           <button className="px-4 py-2 rounded-full border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition">
@@ -90,11 +114,11 @@ const ProfilePage = ({ params }) => {
           <p className="text-sm text-gray-400">Posts</p>
         </div>
         <div className="text-center">
-          <h2 className="text-xl">1.2k</h2>
+          <h2 className="text-xl">{user.followers.length}</h2>
           <p className="text-sm text-gray-400">Followers</p>
         </div>
         <div className="text-center">
-          <h2 className="text-xl">250</h2>
+          <h2 className="text-xl">{user.following.length}</h2>
           <p className="text-sm text-gray-400">Following</p>
         </div>
       </div>
