@@ -9,6 +9,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 const url = "http://localhost:8080/users/login";
 
 const Page = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
   const [error, setError] = useState(""); // State to hold error message
@@ -25,14 +26,14 @@ const Page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError(""); // Clear previous errors before making a request
     try {
       const response = await fetch(url, {
         method: "POST",
         credentials: "include",
-        
+
         headers: {
-          
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userLogin),
@@ -45,11 +46,13 @@ const Page = () => {
         throw new Error(errorMessage);
       }
       console.log(response);
-      
+
       const data = await response.json();
       localStorage.setItem("refreshToken", data.data.refreshToken);
       router.push("/user/home");
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       setError(error.message); // Set the error message
       console.error(error, "Error in response");
     }
@@ -111,11 +114,7 @@ const Page = () => {
               className="px-3 py-2 rounded-sm outline-none text-black shadow-md transition-all shadow-green-500/40 w-full hover:scale-[0.99]"
             />
           </div>
-          {error && (
-            <div className="text-red-500 text-sm mb-2">
-              {error}
-            </div>
-          )}
+          {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
           <div className="text-xs hover:underline cursor-pointer text-white/80">
             Forgot Password
           </div>
@@ -124,6 +123,13 @@ const Page = () => {
             className="px-5 py-2 rounded-md my-4 w-full flex justify-center items-center bg-green-700 hover:bg-green-600 transition-all active:scale-[0.9]"
           >
             Login
+            {loading ? (
+              <img
+                src="./loading.gif"
+                alt="loading gif"
+                className="w-6 h-6 object-contain ml-3"
+              />
+            ) : null}
           </button>
           <Link
             href="/register"
