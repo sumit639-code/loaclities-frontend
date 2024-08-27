@@ -1,15 +1,16 @@
 import { MoreVert, Person, ThumbUp } from "@mui/icons-material";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 const Post = (props) => {
-  console.log(props.images.length);
+  console.log(props);
 
   return (
     <div className="w-full max-w-lg mx-auto p-2 border-[1px] border-slate-800 mt-5 rounded-xl ">
       <div className="p-3 pb-1 flex items-center justify-between font-RedHat font-semibold">
-        <div className="flex items-center space-x-3">
+        <Link href={`/user/${props.userId}`} className="flex items-center space-x-3">
           <div className="border-2 rounded-full w-9 h-9 flex items-center justify-center cursor-pointer overflow-hidden">
             <Image
               src={props.userprofile || "/Sample.svg"}
@@ -25,7 +26,7 @@ const Post = (props) => {
               {props.productname}
             </div>
           </div>
-        </div>
+        </Link>
         <MoreVert className="text-gray-600 cursor-pointer" />
       </div>
 

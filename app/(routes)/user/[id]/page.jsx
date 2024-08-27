@@ -56,7 +56,7 @@ const ProfilePage = ({ params }) => {
   }
 
   return (
-    <div className="text-white font-RedHat p-6">
+    <div className="text-white font-RedHat p-6 ">
       {/* Profile Header */}
       <div className="flex flex-col items-center">
         <div className="relative w-32 h-32">
@@ -113,17 +113,18 @@ const ProfilePage = ({ params }) => {
       </div>
 
       {/* Posts/Projects Grid */}
-      <div className="grid grid-cols-2 gap-4 mt-6">
-        <div className="relative h-48">
-          <Image
-            src="/path-to-post-image.jpg"
-            alt="Post Image"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
-          />
-        </div>
-        {/* Repeat above div for more posts */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6">
+        {user.posts?.map((fn) => (
+          <div key={fn.id} className="h-48">
+            <Image
+              src={fn.images[0] || "/sample.svg"}
+              alt="Post Image"
+              width={500}
+              height={500}
+              className="rounded-lg w-full h-full object-cover"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
