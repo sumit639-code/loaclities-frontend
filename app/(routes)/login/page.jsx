@@ -1,9 +1,8 @@
 "use client";
-import { Password } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 
 const url = "http://localhost:8080/users/login";
@@ -13,6 +12,21 @@ const Page = () => {
   const router = useRouter();
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
   const [error, setError] = useState(""); // State to hold error message
+
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleSubmit(); // Call handleSubmit directly
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [userLogin]); // Add userLogin as a dependency to update the event listener when state changes
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -25,14 +39,13 @@ const Page = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e?.preventDefault(); // Only prevent default if `e` is passed
     setLoading(true);
     setError(""); // Clear previous errors before making a request
     try {
       const response = await fetch(url, {
         method: "POST",
         credentials: "include",
-
         headers: {
           "Content-Type": "application/json",
         },
@@ -40,21 +53,18 @@ const Page = () => {
       });
 
       if (!response.ok) {
-        // Extract error message from the response
         const errorData = await response.json();
         const errorMessage = errorData.message || "An unknown error occurred";
         throw new Error(errorMessage);
       }
-      console.log(response);
 
       const data = await response.json();
       localStorage.setItem("refreshToken", data.data.refreshToken);
       router.push("/user/home");
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       setError(error.message); // Set the error message
-      console.error(error, "Error in response");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,9 +118,8 @@ const Page = () => {
               required
               autoComplete="current-password"
               placeholder="Password"
-              autoFocus
-              onChange={handleInput}
               value={userLogin.password}
+              onChange={handleInput}
               className="px-3 py-2 rounded-sm outline-none text-black shadow-md transition-all shadow-green-500/40 w-full hover:scale-[0.99]"
             />
           </div>
@@ -125,7 +134,7 @@ const Page = () => {
             Login
             {loading ? (
               <img
-                src="./loading.gif"
+                src="/loading.gif"
                 alt="loading gif"
                 className="w-6 h-6 object-contain ml-3"
               />
@@ -135,7 +144,7 @@ const Page = () => {
             href="/register"
             className="text-xs text-white/80 hover:underline cursor-pointer hover:text-green-500"
           >
-            Didn't have an account?
+            Don't have an account?
           </Link>
         </div>
       </div>

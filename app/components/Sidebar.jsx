@@ -1,6 +1,13 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { Category, Home, Logout, People, Search } from "@mui/icons-material";
+import {
+  Add,
+  Category,
+  Home,
+  Logout,
+  People,
+  Search,
+} from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Modal from "./Modal";
@@ -51,6 +58,12 @@ const Sidebar = () => {
             Categories
           </Link>
           <Link
+            href="/user/addProduct"
+            className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
+          >
+            Add Product
+          </Link>
+          <Link
             href="/user/search"
             className="block py-2.5 px-4 rounded-full transition duration-200 hover:bg-gray-700 hover:scale-[0.9]"
           >
@@ -88,6 +101,14 @@ const Sidebar = () => {
           >
             <span>
               <Category />
+            </span>
+          </Link>
+          <Link
+            href="/user/addProduct"
+            className="flex flex-col items-center justify-center py-2.5 px-4"
+          >
+            <span>
+              <Add />
             </span>
           </Link>
           <Link

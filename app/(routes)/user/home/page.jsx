@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import Loading2 from "@/app/components/loading2";
-import Loading from "../../loading/page";
+import Loading from "@/app/components/loading";
+
 const url = "http://localhost:8080/products/products";
 
 const Page = () => {
