@@ -59,7 +59,7 @@ const Page = () => {
 
   return (
     <div className="text-white p-4 flex flex-col items-center mb-14">
-      <Write />
+      {/* <Write /> */}
       {products?.map((product) => (
         <Post key={product.id} {...product} /> // Assuming each product has a unique id and Post component accepts product props
       ))}

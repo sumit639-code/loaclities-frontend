@@ -35,7 +35,7 @@ const Post = (props) => {
       </div>
 
       <div
-        className={`p-3 grid gap-4 grid-rows-${Math.floor(props.images.length / 2)} grid-flow-col  justify-center`}
+        className={`p-3 grid gap-4 grid-rows-${Math.floor(props.images.length/2)} grid-flow-col  justify-center`}
       >
         {props.images.length > 0 ? (
           props.images.map((image, index) => (
