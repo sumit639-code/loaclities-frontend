@@ -46,7 +46,7 @@ const AddProduct = () => {
       });
       console.log(response);
       if (response.ok) {
-        router.push("/products");
+        router.push("/user/home");
       } else {
         console.error("Failed to add product");
       }
